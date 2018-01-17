@@ -3,14 +3,14 @@ import glob
 
 '''
 ##### Copy backup into original file
-rmtables('calibrated_final.ms')
-os.system('rm -rf calibrated_final.ms.flagversions')
+#rmtables('calibrated_final.ms')
+#os.system('rm -rf calibrated_final.ms.flagversions')
 os.system('cp -r calibrated_final.ms.backup calibrated_final.ms')
 
 ##### Average all windows and split
 rmtables('calibrated_source_4spw.ms')
 os.system('rm -rf calibrated_source_4spw.ms.flagversions')
-split(vis='calibrated_final.ms', outputvis='calibrated_source_4spw.ms', spw='0~3', datacolumn='data', width=[64,64,64,64], field='IMLup')
+split(vis='calibrated_final.ms', outputvis='calibrated_source_4spw.ms', spw='0~3', datacolumn='data', width=[64,64,64,64], field='DG_Tauri')
 
 ##### Make 4spw backup
 rmtables('calibrated_source_4spw.ms.backup')
@@ -28,7 +28,7 @@ os.system('cp -r calibrated_source_4spw.ms.backup calibrated_source_4spw.ms')
 contvis  = 'calibrated_source_4spw.ms'
 
 # Interactive data reduction?
-interactive=False
+interactive=True
 
 
 
@@ -38,7 +38,7 @@ interactive=False
 # -------------------------------------------------------------------------------------#
 
 # Beam = 0.63" x 0.52"
-cell = '0.07arcsec' 
+cell = '0.004arcsec' 
 
 # Weighting
 weighting = 'briggs'
@@ -58,15 +58,15 @@ spw='0,1,2,3'
 #######################################
 
 # Field name
-field = 'IMLup'
+field = 'DG_Tauri'
 # Name of selfcal calibration tables
-caltablename = 'IMLup'
+caltablename = 'DG_Tauri'
 # Image size
-imsize = [450,450] 
+imsize = [256,256] 
 # Continuum image name
-contimagename = 'IMLup_cont_image'
+contimagename = 'DG_Tauri_cont_image'
 # Continuum mask name
-mask = 'circle[[225pix,225pix],40pix]'
+#mask = 'circle[[225pix,225pix],40pix]'
 
 # NOISE LEVELS (mJy)
 # Source    I        Q,U      POLI
@@ -74,16 +74,16 @@ mask = 'circle[[225pix,225pix],40pix]'
 
 # Thresholds:
 
-threshold_0 = '1e-3Jy'
+#threshold_0 = '1e-3Jy'
 
 # threshold_final_I = 2*sigma_I in the final CLEANed map
-threshold_final_I = '1.5e-4Jy'
+#threshold_final_I = '1.5e-4Jy'
 
 # threshold_final_QUV = 2*sigma_Q,U in the final CLEANed maps
-threshold_final_QUV = '3e-5Jy'
+#threshold_final_QUV = '3e-5Jy'
 
 # polithresh = 3*sigma in the POLI map
-polithresh = '6e-5Jy/beam'
+#polithresh = '6e-5Jy/beam'
 
 # Limiting polarization fraction: 1.5/7.5 * 0.3 = 0.6%
 
@@ -205,7 +205,7 @@ for iteration in [p0, p1, p2, p3, pol] :
 	       specmode='mfs',
 	       spw=spw,
 	       mask=mask,
-	       threshold=iteration['threshold'],
+	       #threshold=iteration['threshold'],
 	       niter=iteration['niter'],
 	       weighting=weighting,
 	       robust=robust,
@@ -289,7 +289,7 @@ for iteration in [p0, p1, p2, p3, pol] :
                    outframe='BARY',
                    specmode='mfs',
                    spw=spw,
-                   threshold=threshold, # Changed
+                   #threshold=threshold, # Changed
                    niter=iteration['niter'],
                    weighting=weighting,
                    robust=robust,
