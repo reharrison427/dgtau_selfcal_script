@@ -38,7 +38,7 @@ interactive=True
 # -------------------------------------------------------------------------------------#
 
 # Beam = 0.63" x 0.52"
-cell = '0.004arcsec' 
+cell = '0.04arcsec' 
 
 # Weighting
 weighting = 'briggs'
